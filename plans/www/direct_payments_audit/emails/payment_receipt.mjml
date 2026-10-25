@@ -1,0 +1,31 @@
+<!--
+  AFS_DIRECT_PAYMENTS_MODIFIER_ADDITION — plans/www/direct_payments_audit/15-default-emails.md §15.3.
+  Default email body: payment_receipt. Receipt for a one-time payment.
+  A fragment only: DefaultEmailTemplates::mjml() places it in the dp_body slot of _layout.mjml.
+-->
+    <mj-section padding="20px 0 0 0">
+      <mj-column>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="22px" font-weight="700" line-height="30px" color="#111827" padding="0px 32px">Thank you for your payment</mj-text>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="15px" line-height="24px" color="#374151" padding="16px 32px 0px 32px">
+            <p style="margin:0 0 12px 0;">${dp_greeting}</p>
+            <p style="margin:0 0 12px 0;">This is your receipt from ${dp_brand_name}.</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="4px 0 0 0">
+      <mj-column>
+        <mj-table font-family="Inter, Helvetica, Arial, sans-serif" font-size="14px" line-height="20px" color="#374151" padding="4px 32px 0px 32px">
+          <tr style="border-bottom:1px solid #f3f4f6;"><td style="padding:9px 0; color:#6b7280;">Receipt number</td><td style="padding:9px 0; text-align:right; font-weight:600; color:#111827;">${direct_payments_invoice_number}</td></tr>
+          <tr style="border-bottom:1px solid #f3f4f6;"><td style="padding:9px 0; color:#6b7280;">Date</td><td style="padding:9px 0; text-align:right; font-weight:600; color:#111827;">${direct_payments_charged_at}</td></tr>
+          <tr style="border-bottom:1px solid #f3f4f6;"><td style="padding:9px 0; color:#6b7280;">Amount</td><td style="padding:9px 0; text-align:right; font-weight:600; color:#111827;">${direct_payments_amount} ${direct_payments_currency}</td></tr>
+          <tr style="border-bottom:1px solid #f3f4f6;"><td style="padding:9px 0; color:#6b7280;">Paid with</td><td style="padding:9px 0; text-align:right; font-weight:600; color:#111827;">${dp_card}</td></tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="16px 0 0 0">
+      <mj-column>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="14px" line-height="22px" color="#4b5563" padding="0px 32px">
+            <p style="margin:0 0 10px 0;">Keep this email for your records. If you have any questions about this payment, just reply to this email.</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>

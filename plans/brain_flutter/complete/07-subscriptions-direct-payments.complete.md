@@ -1,0 +1,44 @@
+# 07 — Controlling subscriptions through Direct Payments — Completion
+
+**Verified:** 2026-10-05 — `tool/gates.sh` fully green (G1–G9, `flutter analyze` clean, `flutter test` **399 passed**, of which 153 are new for this file: 105 subscription, 28 payments, 20 billing).
+**No money moved and no provider was contacted** by anything in this file: the app's tests use fake repositories, the server tests fake the provider actions, the sync service and the refund service.
+**Not run:** the server PHPUnit files (no reachable MySQL on the authoring PC); the new routes are not deployed to lab2; none of these screens has been exercised on the phone.
+
+**Status:** **Complete in code (P4 and P5); not verified on a device or against a live server. P5b (BS11) deliberately not built.** Every acceptance line in §7.11 is covered by a test; the lab checks in §7.10 are still to do and are listed below.
+
+## What was built
+
+| § | Item | State | Evidence |
+|---|------|-------|----------|
+| 7.1 | Three layers kept apart (entitled / paid for / dunning); drift labelled, red only when unexplained | ✅ | `SubscriptionTab` `_DriftNote`: a manual grant that differs reads "Plan set manually — differs from what they pay for" (not red); a difference with `tier_source` ≠ manual is red; agreement is a quiet "Entitled: Pro · Pays for: Pro" line |
+| 7.3 | **Subscription tab** renders every resolver path and status with no error screen | ✅ | `features/subscription/ui/subscription_tab.dart`. `none` (empty state naming what was checked), `governing` / `payer_link` (normal card), `payer_customer` (yellow note), `incomplete` ("Checkout was never completed"), `past_due` (red banner + dunning block), cancelled (grey card with cancelled and access-end dates, no Cancel), cancel-at-period-end, last sync error (amber), unknown status shown as written. Plan + level, status pill, next charge (date, amount, currency), provider pill, **SANDBOX / LIVE** chip from the processor's mode, processor name, copyable provider subscription id, last synced. Dunning block: state, past-due since, downgrade after with days left, plan paid → in effect, last notice; "Not on the dunning ladder."; "Enforcement is off on this server — states will not change on their own" |
+| 7.3 | Buttons from the server's `allowed_actions`; hidden for the signed-in member | ✅ | Sync now / Change plan / Cancel subscription only when allowed; a note replaces them for the acting member |
+| 7.4 | **Cancel** | ✅ | `cancel_subscription_sheet.dart`: "Cancel Pro for james1 at stripe? This is immediate at the provider and cannot be undone from here."; the access-end outcome read from `access_ends_policy` (immediately, or the end of the paid period with its date); reason 3–500 required; **production requires the username typed**; entitlement-unchanged note with a "Set plan directly instead" shortcut; success closes the sheet and says "Cancelled — the member's notification email is sent by the webhook."; provider refusal and stale record shown inside the sheet |
+| 7.5 | **Change plan** (billing) vs **Set plan directly** (entitlement) | ✅ | `change_plan_sheet.dart`: says it changes the provider subscription; lists every tier (current disabled; one not priced on this processor greyed with the server's reason; price and interval); Advanced → proration (default `create_prorations`, or none); reason required; an explicit confirmation dialog before anything is sent; a **response warning is a dialog the operator must dismiss**, never swallowed, with "Set plan directly" offered after the sheet closes. The shortcut opens the member screen's own entitlement sheet, so the two stay distinct |
+| 7.6 | **Payments tab, charge sheet, refund** | ✅ | `features/payments/ui/payments_tab.dart`: rows (amount, status, date, provider, "Refunded x", SANDBOX/LIVE chip); charge sheet with copyable ids and gross / refunded / net; **Refund** only for a succeeded charge with something left, not for the acting member, not without the money routes. Refund sheet: empty amount = everything left and the button says how much; the amount is checked (more than 0, no more than refundable, at most two decimals) **before anything is sent**; reason required (stricter than the server); **production requires the amount typed back** and the expected text follows the amount |
+| 7.6 | **Ledger** | ✅ | Billing → "View all charges": every charge, filter by status and provider, totals; rows name the member when the ledger resolved one, else the payer email |
+| 7.7 | **Billing destination** | ✅ | `features/billing/ui/billing_page.dart`: "Enforcement: OFF/ON (grace, max)" first; when off, an explanation and an empty list that does **not** read as "all clear"; counts per state; needs-attention list (plan, state, days to downgrade); tapping opens that member **on the Subscription tab** |
+| 7.9 | Safety rails | ✅ | 1 capability gating (`subscription_staff` adds the tabs, `billing_overview` adds Billing, `money_ledger` allows refunds and the ledger); 2 reasons on cancel, change plan, refund; 3 typed confirmation on production for cancel (username) and refund (amount); 4 self-action hidden in the app and refused by the server; 5 one write at a time per cubit; 6 no client retries, an ambiguous outcome is resolved by re-reading; 7 SANDBOX/LIVE chip on subscriptions and charges; 8 every write is audited server-side (file 04) |
+| 7.9/7.11 | Ambiguous outcomes | ✅ | Cancel: re-read the subscription, saved if it is now cancelled. Change plan: saved if the link is now on the target tier. Refund: re-read the charges, saved only if `refunded_cents` moved. In every case the original request is sent **once**; a re-read that also fails reports the original error |
+| 7.11 | The app never calls a `processors` billing route | ✅ | A test reads `api_paths.dart` and every `lib` file for the forbidden strings; every path the table builds is asserted to be a staff or money route; gate G2 now forbids `login`, `processors/` and `directpayments/` precisely |
+
+## Server changes made for this file (all in `w/www`, see also 04 and `00_extras.md`)
+
+- **E1 — `MoneyController` was broken (off-plan, found while reading it):** `toLedgerRows()` looked members up by `brain_memberships.customer_id`, a column dropped by BM1, so **the ledger always failed and a refund failed after the provider had already refunded the money**. Fixed by resolving the member through the payer. See `complete/00_extras.md` E1. **Until this is deployed and its tests are green, do not refund from the app and expect the ledger to answer 500.**
+- **BS8 `processor_mode`:** each charge row now carries `processor_mode`, resolved **through the charge's Direct Payment** (a processor is always connected to a Direct Payment), falling back to the charge's own processor only when it has none, and left null rather than guessed.
+
+## Divergences
+
+- **The Billing destination needs `billing_overview`** (10 §10.3 says either that or `money_ledger`); with only the ledger there is nothing to show first.
+- **Ledger rows carry no SANDBOX/LIVE chip**: the existing ledger route does not say which processor took the charge. The per-member Payments tab does.
+- **Mode through the Direct Payment** can differ from the processor that actually took an old charge after a processor swap; the Direct Payment is used because that is the stated model, and a swap onto a processor of the other mode would be the only way to see a difference.
+- **Refunds send only `amount_cents` and `reason`**; `reverse_transfer` and `refund_application_fee` are left to the server's defaults (both true, inert for a non-split charge).
+- **Change plan always asks for an extra confirmation dialog** (the plan asks for plain confirm on lab and does not name one for change plan; money moves, so the app asks).
+- **`allowed_actions.change_tier`** is "another tier is priced on this processor"; a provider that refuses a change (PayPal) is reported at action time as the server's message, not hidden beforehand (file 04).
+
+## Not verified — what is left for you (07 §7.10)
+
+1. Deploy `w/www` (handoff-share §13 and §14), run the server tests **including `tests/Feature/DirectPayments`** (the self-service controller was edited in file 04) and `MoneyLedgerMemberResolutionTest`.
+2. **P4 on the phone against lab2:** `james1` / `james2` resolve to `none` or `payer_customer` and must render without an error screen; `appfactorystudio` shows the self note; Billing shows "Enforcement: OFF" with an explanation; the ledger answers (it could not before E1).
+3. **P5 needs a completed sandbox subscription**, which only you can create (card entry). Confirm the SANDBOX chip first, then try sync, change plan, cancel, and a partial and a full refund. **Do not try any of these on a real member.**
+4. TalkBack labels on the new screens were not reviewed.

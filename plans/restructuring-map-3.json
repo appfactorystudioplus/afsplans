@@ -1,0 +1,34 @@
+{
+    "moved": {
+        "Externals/MailHandler/ClientVariables/ClientVariableProvider.php": "Services/Portal/MailHandler/ClientVariables/ClientVariableProvider.php",
+        "Externals/MailHandler/ClientVariables/ClientVariables.php": "Services/Portal/MailHandler/ClientVariables/ClientVariables.php",
+        "Externals/MailHandler/Exceptions/MailHandlerMissingException.php": "Services/Portal/MailHandler/Exceptions/MailHandlerMissingException.php",
+        "Externals/MailHandler/Exceptions/MailIntegrationMissingException.php": "Services/Portal/MailHandler/Exceptions/MailIntegrationMissingException.php",
+        "Externals/MailHandler/MailHandlerPolicy.php": "Services/Portal/MailHandler/MailHandlerPolicy.php",
+        "Externals/MailHandler/MailHandlerSender.php": "Services/Portal/MailHandler/MailHandlerSender.php",
+        "Externals/MailHandler/MailHandlerSenderOptions.php": "Services/Portal/MailHandler/MailHandlerSenderOptions.php",
+        "Externals/MailHandler/SendResult.php": "Services/Portal/MailHandler/SendResult.php",
+        "Http/Controllers/Externals/MailHandler/MailHandlerApiController.php": "Http/Controllers/Portal/MailHandler/MailHandlerApiController.php",
+        "Http/Controllers/Externals/MailHandler/MailHandlerController.php": "Http/Controllers/Portal/MailHandler/MailHandlerController.php",
+        "Http/Requests/Externals/MailHandler/Storemail_handlerRequest.php": "Http/Requests/Portal/MailHandler/Storemail_handlerRequest.php",
+        "Http/Requests/Externals/MailHandler/Updatemail_handlerRequest.php": "Http/Requests/Portal/MailHandler/Updatemail_handlerRequest.php",
+        "Models/Externals/MailHandler/MailHandlerModel.php": "Models/Portal/MailHandler/MailHandlerModel.php",
+        "Models/Externals/MailHandler/MailProviderModel.php": "Models/Portal/MailHandler/MailProviderModel.php"
+    },
+    "classes": {
+        "App\\Externals\\MailHandler\\ClientVariables\\ClientVariableProvider": "App\\Services\\Portal\\MailHandler\\ClientVariables\\ClientVariableProvider",
+        "App\\Externals\\MailHandler\\ClientVariables\\ClientVariables": "App\\Services\\Portal\\MailHandler\\ClientVariables\\ClientVariables",
+        "App\\Externals\\MailHandler\\Exceptions\\MailHandlerMissingException": "App\\Services\\Portal\\MailHandler\\Exceptions\\MailHandlerMissingException",
+        "App\\Externals\\MailHandler\\Exceptions\\MailIntegrationMissingException": "App\\Services\\Portal\\MailHandler\\Exceptions\\MailIntegrationMissingException",
+        "App\\Externals\\MailHandler\\MailHandlerPolicy": "App\\Services\\Portal\\MailHandler\\MailHandlerPolicy",
+        "App\\Externals\\MailHandler\\MailHandlerSender": "App\\Services\\Portal\\MailHandler\\MailHandlerSender",
+        "App\\Externals\\MailHandler\\MailHandlerSenderOptions": "App\\Services\\Portal\\MailHandler\\MailHandlerSenderOptions",
+        "App\\Externals\\MailHandler\\SendResult": "App\\Services\\Portal\\MailHandler\\SendResult",
+        "App\\Http\\Controllers\\Externals\\MailHandler\\MailHandlerApiController": "App\\Http\\Controllers\\Portal\\MailHandler\\MailHandlerApiController",
+        "App\\Http\\Controllers\\Externals\\MailHandler\\MailHandlerController": "App\\Http\\Controllers\\Portal\\MailHandler\\MailHandlerController",
+        "App\\Http\\Requests\\Externals\\MailHandler\\Storemail_handlerRequest": "App\\Http\\Requests\\Portal\\MailHandler\\Storemail_handlerRequest",
+        "App\\Http\\Requests\\Externals\\MailHandler\\Updatemail_handlerRequest": "App\\Http\\Requests\\Portal\\MailHandler\\Updatemail_handlerRequest",
+        "App\\Models\\Externals\\MailHandler\\MailHandlerModel": "App\\Models\\Portal\\MailHandler\\MailHandlerModel",
+        "App\\Models\\Externals\\MailHandler\\MailProviderModel": "App\\Models\\Portal\\MailHandler\\MailProviderModel"
+    }
+}

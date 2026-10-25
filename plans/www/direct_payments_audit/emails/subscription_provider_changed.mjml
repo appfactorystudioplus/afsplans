@@ -1,0 +1,31 @@
+<!--
+  AFS_DIRECT_PAYMENTS_MODIFIER_ADDITION — plans/www/direct_payments_audit/15-default-emails.md §15.3.
+  Default email body: subscription_provider_changed. Heads-up for a subscriber whose card was carried over automatically — no action needed.
+  A fragment only: DefaultEmailTemplates::mjml() places it in the dp_body slot of _layout.mjml.
+-->
+    <mj-section padding="20px 0 0 0">
+      <mj-column>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="22px" font-weight="700" line-height="30px" color="#111827" padding="0px 32px">Nothing for you to do</mj-text>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="15px" line-height="24px" color="#374151" padding="16px 32px 0px 32px">
+            <p style="margin:0 0 12px 0;">${dp_greeting}</p>
+            <p style="margin:0 0 12px 0;">We have changed how payments are taken for <strong>${plan_name}</strong>. Your saved card has been carried over, so your subscription continues automatically.</p>
+            <p style="margin:0 0 12px 0;">From ${renewal_date}, the payment may look slightly different on your bank or card statement. The amount and schedule stay the same.</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="4px 0 0 0">
+      <mj-column>
+        <mj-table font-family="Inter, Helvetica, Arial, sans-serif" font-size="14px" line-height="20px" color="#374151" padding="4px 32px 0px 32px">
+          <tr style="border-bottom:1px solid #f3f4f6;"><td style="padding:9px 0; color:#6b7280;">Plan</td><td style="padding:9px 0; text-align:right; font-weight:600; color:#111827;">${plan_name}</td></tr>
+          <tr style="border-bottom:1px solid #f3f4f6;"><td style="padding:9px 0; color:#6b7280;">Next payment</td><td style="padding:9px 0; text-align:right; font-weight:600; color:#111827;">${amount}</td></tr>
+          <tr style="border-bottom:1px solid #f3f4f6;"><td style="padding:9px 0; color:#6b7280;">Payment date</td><td style="padding:9px 0; text-align:right; font-weight:600; color:#111827;">${renewal_date}</td></tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="16px 0 0 0">
+      <mj-column>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="14px" line-height="22px" color="#4b5563" padding="0px 32px">
+            <p style="margin:0 0 10px 0;">If you have any questions, just reply to this email.</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>

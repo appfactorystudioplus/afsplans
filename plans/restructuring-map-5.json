@@ -1,0 +1,10 @@
+{
+    "moved": {
+        "Services/Portal/Support/AppFolder.php": "Services/Portal/AppFolder.php",
+        "Services/Portal/Support/TenantMember.php": "Services/Brain/Memberships/TenantMember.php"
+    },
+    "classes": {
+        "App\\Services\\Portal\\Support\\AppFolder": "App\\Services\\Portal\\AppFolder",
+        "App\\Services\\Portal\\Support\\TenantMember": "App\\Services\\Brain\\Memberships\\TenantMember"
+    }
+}

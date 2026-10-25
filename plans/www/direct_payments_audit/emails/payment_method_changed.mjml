@@ -1,0 +1,21 @@
+<!--
+  AFS_DIRECT_PAYMENTS_MODIFIER_ADDITION — plans/www/direct_payments_audit/15-default-emails.md §15.3.
+  Default email body: payment_method_changed. Confirms the card on a subscription was changed.
+  A fragment only: DefaultEmailTemplates::mjml() places it in the dp_body slot of _layout.mjml.
+-->
+    <mj-section padding="20px 0 0 0">
+      <mj-column>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="22px" font-weight="700" line-height="30px" color="#111827" padding="0px 32px">Your payment method was updated</mj-text>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="15px" line-height="24px" color="#374151" padding="16px 32px 0px 32px">
+            <p style="margin:0 0 12px 0;">${dp_greeting}</p>
+            <p style="margin:0 0 12px 0;">The payment method for <strong>${plan_name}</strong> has been changed. Future payments will use ${dp_card}.</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="16px 0 0 0">
+      <mj-column>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="14px" line-height="22px" color="#4b5563" padding="0px 32px">
+            <p style="margin:0 0 10px 0;">If you didn't make this change, please reply to this email straight away.</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>

@@ -1,0 +1,28 @@
+{
+    "moved": {
+        "Console/Commands/Externals/DataLifecycle/DataFootprint.php": "Console/Commands/DataLifecycle/DataFootprint.php",
+        "Console/Commands/Externals/DataLifecycle/DataPrune.php": "Console/Commands/DataLifecycle/DataPrune.php",
+        "Externals/DataLifecycle/AnalyticsEventsPolicy.php": "DataLifecycle/AnalyticsEventsPolicy.php",
+        "Externals/DataLifecycle/Chunker.php": "DataLifecycle/Chunker.php",
+        "Externals/DataLifecycle/DataPruner.php": "DataLifecycle/DataPruner.php",
+        "Externals/DataLifecycle/FootprintReporter.php": "DataLifecycle/FootprintReporter.php",
+        "Externals/DataLifecycle/PolicyPlan.php": "DataLifecycle/PolicyPlan.php",
+        "Externals/DataLifecycle/PolicyResult.php": "DataLifecycle/PolicyResult.php",
+        "Externals/DataLifecycle/RetentionPolicy.php": "DataLifecycle/RetentionPolicy.php",
+        "Externals/DataLifecycle/TimeWindowPolicy.php": "DataLifecycle/TimeWindowPolicy.php",
+        "Models/Externals/DataLifecycle/DataPruneRun.php": "Models/DataLifecycle/DataPruneRun.php"
+    },
+    "classes": {
+        "App\\Console\\Commands\\Externals\\DataLifecycle\\DataFootprint": "App\\Console\\Commands\\DataLifecycle\\DataFootprint",
+        "App\\Console\\Commands\\Externals\\DataLifecycle\\DataPrune": "App\\Console\\Commands\\DataLifecycle\\DataPrune",
+        "App\\Externals\\DataLifecycle\\AnalyticsEventsPolicy": "App\\DataLifecycle\\AnalyticsEventsPolicy",
+        "App\\Externals\\DataLifecycle\\Chunker": "App\\DataLifecycle\\Chunker",
+        "App\\Externals\\DataLifecycle\\DataPruner": "App\\DataLifecycle\\DataPruner",
+        "App\\Externals\\DataLifecycle\\FootprintReporter": "App\\DataLifecycle\\FootprintReporter",
+        "App\\Externals\\DataLifecycle\\PolicyPlan": "App\\DataLifecycle\\PolicyPlan",
+        "App\\Externals\\DataLifecycle\\PolicyResult": "App\\DataLifecycle\\PolicyResult",
+        "App\\Externals\\DataLifecycle\\RetentionPolicy": "App\\DataLifecycle\\RetentionPolicy",
+        "App\\Externals\\DataLifecycle\\TimeWindowPolicy": "App\\DataLifecycle\\TimeWindowPolicy",
+        "App\\Models\\Externals\\DataLifecycle\\DataPruneRun": "App\\Models\\DataLifecycle\\DataPruneRun"
+    }
+}

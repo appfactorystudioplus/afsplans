@@ -1,0 +1,12 @@
+Wire up asset thumbnail serving (route + job dispatch)
+In apps/dream_graph, both resources/js/graph/model/nodeTypes/image.tsx and resources/js/graph/panels/AssetPicker.tsx hardcode image URLs as /api/assets/${uuid}/thumbnail, but grepping routes/api.php confirms no such route exists at all (only GET/PATCH/DELETE /projects/{project}/assets/{asset}, which return/mutate JSON metadata via AssetController::show, not raw file bytes). So every image display in the app is currently broken — a 404/broken image icon, even for a correctly-configured Image node with a valid, existing asset_uuid.
+
+There IS a real thumbnail generation pipeline already written: app/Jobs/GenerateAssetThumbnails.php generates 256px and 1024px WebP conversions via Imagick, stored at "{$originalPath}/256.webp" and "{$originalPath}/1024.webp" alongside the original file. But grepping AssetController.php and AssetControllerEnhanced.php confirms this job is never dispatched anywhere — uploading an asset never triggers thumbnail generation.
+
+To fix this end-to-end, at minimum:
+
+Dispatch GenerateAssetThumbnails::dispatch($asset) after a successful upload in AssetController::store (check if AssetControllerEnhanced.php is the one actually wired into routes/api.php vs AssetController.php — there appear to be two similar controllers, confirm which is live).
+Add a route + controller action to actually serve the file bytes, e.g. GET /assets/{asset}/thumbnail (or under /api/) that: resolves which conversion to serve (query param or Accept-based for size, defaulting to 256), checks the conversion file exists on the 'assets' disk (fall back to the original file if the job hasn't run yet or failed — GenerateAssetThumbnails's own docblock says "graceful failure... asset still usable with placeholder"), and streams it with proper Content-Type/caching headers.
+Verify the PHP Imagick extension is actually available in the deployment environment — if not, GenerateAssetThumbnails will fail on every attempt (its failed() handler only logs, doesn't fall back to a different image library).
+Consider whether the frontend's "missing asset placeholder" logic (image.tsx's hasAsset check) should also handle a valid asset_uuid whose thumbnail 404s (currently it doesn't — the <img> just shows a browser broken-image icon in that case rather than the documented placeholder).
+This is a genuine cross-cutting Phase 4 (asset management) gap, not a small component fix — scope it properly.

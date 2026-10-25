@@ -1,0 +1,40 @@
+<!--
+  AFS_DIRECT_PAYMENTS_MODIFIER_ADDITION — plans/www/direct_payments_audit/15-default-emails.md §15.3.
+  Default email body: payment_details_required. Sent when a processor change needs the subscriber to set up payment again, and as each reminder.
+  A fragment only: DefaultEmailTemplates::mjml() places it in the dp_body slot of _layout.mjml.
+-->
+    <mj-section padding="20px 0 0 0">
+      <mj-column>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="22px" font-weight="700" line-height="30px" color="#111827" padding="0px 32px">Please update your payment details</mj-text>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="15px" line-height="24px" color="#374151" padding="16px 32px 0px 32px">
+            <p style="margin:0 0 12px 0;">${dp_greeting}</p>
+            <p style="margin:0 0 12px 0;">We have changed how payments are taken for <strong>${plan_name}</strong>. To keep your subscription running without interruption, please add your payment details once more. It takes about a minute.</p>
+            <p style="margin:0 0 12px 0;"><strong>Nothing is charged today.</strong> Your next payment of ${amount} will be taken on ${renewal_date}, as usual.</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="4px 0 0 0">
+      <mj-column>
+        <mj-table font-family="Inter, Helvetica, Arial, sans-serif" font-size="14px" line-height="20px" color="#374151" padding="4px 32px 0px 32px">
+          <tr style="border-bottom:1px solid #f3f4f6;"><td style="padding:9px 0; color:#6b7280;">Plan</td><td style="padding:9px 0; text-align:right; font-weight:600; color:#111827;">${plan_name}</td></tr>
+          <tr style="border-bottom:1px solid #f3f4f6;"><td style="padding:9px 0; color:#6b7280;">Next payment</td><td style="padding:9px 0; text-align:right; font-weight:600; color:#111827;">${amount}</td></tr>
+          <tr style="border-bottom:1px solid #f3f4f6;"><td style="padding:9px 0; color:#6b7280;">Payment date</td><td style="padding:9px 0; text-align:right; font-weight:600; color:#111827;">${renewal_date}</td></tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="8px 0 0 0">
+      <mj-column>
+        <mj-button href="${renewal_url}" align="left" background-color="${dp_brand_color}" color="#ffffff" font-family="Inter, Helvetica, Arial, sans-serif" font-size="15px" font-weight="600" border-radius="6px" inner-padding="14px 28px" padding="20px 32px 0px 32px">Update payment details</mj-button>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="13px" line-height="20px" color="#6b7280" padding="12px 32px 0px 32px">
+          <p style="margin:0;">Button not working? Copy this link into your browser:<br/><a href="${renewal_url}" style="color:${dp_brand_color}; word-break:break-all;">${renewal_url}</a></p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="16px 0 0 0">
+      <mj-column>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="14px" line-height="22px" color="#4b5563" padding="0px 32px">
+            <p style="margin:0 0 10px 0;">Until you update your details, your subscription carries on exactly as it is now, so you keep your access.</p>
+            <p style="margin:0 0 10px 0;">If you have any questions, just reply to this email.</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>

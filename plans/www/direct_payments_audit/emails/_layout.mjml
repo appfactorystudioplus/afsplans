@@ -1,0 +1,60 @@
+<mjml owa="desktop" version="4.3.0">
+  <!--
+    AFS_DIRECT_PAYMENTS_MODIFIER_ADDITION — plans/www/direct_payments_audit/15-default-emails.md §15.5.
+    Shared shell for every Direct Payments default email. DefaultEmailTemplates::mjml() fills the dp_body slot with the
+    email's fragment, resolves the dp_* layout values (with fallbacks), and keeps exactly one of the dp:logo / dp:nologo
+    blocks before sending. Every attribute is inline so the file opens unchanged in the afsemail (GrapesJS) editor.
+  -->
+  <mj-head>
+    <mj-font name="Inter" href="https://fonts.googleapis.com/css?family=Inter:400,600,700"></mj-font>
+    <mj-preview>${dp_preview}</mj-preview>
+  </mj-head>
+  <mj-body background-color="#f3f4f6" width="600px">
+
+    <mj-section padding="24px 0 0 0">
+      <mj-column>
+        <mj-spacer height="1px"></mj-spacer>
+      </mj-column>
+    </mj-section>
+
+    <mj-wrapper background-color="#ffffff" border-top="4px solid ${dp_brand_color}" border-radius="8px" padding="0px">
+
+      <!--dp:logo-->
+      <mj-section padding="28px 0 4px 0">
+        <mj-column>
+          <mj-image src="${dp_brand_logo}" alt="${dp_brand_name}" width="140px" align="left" padding="0px 32px"></mj-image>
+        </mj-column>
+      </mj-section>
+      <!--/dp:logo-->
+
+      <!--dp:nologo-->
+      <mj-section padding="28px 0 4px 0">
+        <mj-column>
+          <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="18px" font-weight="700" color="#111827" padding="0px 32px">${dp_brand_name}</mj-text>
+        </mj-column>
+      </mj-section>
+      <!--/dp:nologo-->
+
+      ${dp_body}
+
+      <mj-section padding="8px 0 32px 0">
+        <mj-column>
+          <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="15px" line-height="24px" color="#374151" padding="0px 32px">
+            <p style="margin:0;">Thank you,<br/>${dp_brand_name}</p>
+          </mj-text>
+        </mj-column>
+      </mj-section>
+
+    </mj-wrapper>
+
+    <mj-section padding="20px 0 32px 0">
+      <mj-column>
+        <mj-text align="center" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12px" line-height="18px" color="#6b7280" padding="0px 32px">
+          <p style="margin:0 0 6px 0;">You're receiving this email because of a payment or subscription with ${dp_brand_name}.</p>
+          <p style="margin:0;"><a href="${site_url}" style="color:#6b7280; text-decoration:underline;">${site_url}</a> · ${dp_footer_line}</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+  </mj-body>
+</mjml>

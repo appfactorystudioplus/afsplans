@@ -1,0 +1,32 @@
+{
+    "moved": {
+        "Externals/Activity/ActivityServiceProvider.php": "Providers/ActivityServiceProvider.php",
+        "Externals/Analytics/AnalyticsServiceProvider.php": "Providers/AnalyticsServiceProvider.php",
+        "Externals/DataLifecycle/DataLifecycleServiceProvider.php": "Providers/DataLifecycleServiceProvider.php",
+        "Externals/DirectPayments/AppfactoryDirectPaymentsServiceProvider.php": "Providers/AppfactoryDirectPaymentsServiceProvider.php",
+        "Externals/DirectPayments/DirectPaymentsServiceProvider.php": "Providers/DirectPaymentsServiceProvider.php",
+        "Externals/Processor/Connect/BrainInternalSignature.php": "Externals/Marketplace/BrainInternalSignature.php",
+        "Externals/Processor/Connect/ConnectAccountService.php": "Externals/Marketplace/ConnectAccountService.php",
+        "Externals/Processor/Connect/ConnectProfileService.php": "Externals/Marketplace/ConnectProfileService.php",
+        "Externals/Processor/Connect/Jobs/ExecutePendingTransfersJob.php": "Externals/Marketplace/Jobs/ExecutePendingTransfersJob.php",
+        "Externals/Processor/Connect/Jobs/SyncConnectAccountJob.php": "Externals/Marketplace/Jobs/SyncConnectAccountJob.php",
+        "Externals/Processor/Connect/SplitCalculator.php": "Externals/Marketplace/SplitCalculator.php",
+        "Externals/Processor/Connect/TransferExecutor.php": "Externals/Marketplace/TransferExecutor.php",
+        "Services/Brain/Memberships/Billing/BillingMailer.php": "Services/Brain/Memberships/Mail/BillingMailer.php"
+    },
+    "classes": {
+        "App\\Externals\\Activity\\ActivityServiceProvider": "App\\Providers\\ActivityServiceProvider",
+        "App\\Externals\\Analytics\\AnalyticsServiceProvider": "App\\Providers\\AnalyticsServiceProvider",
+        "App\\Externals\\DataLifecycle\\DataLifecycleServiceProvider": "App\\Providers\\DataLifecycleServiceProvider",
+        "App\\Externals\\DirectPayments\\AppfactoryDirectPaymentsServiceProvider": "App\\Providers\\AppfactoryDirectPaymentsServiceProvider",
+        "App\\Externals\\DirectPayments\\DirectPaymentsServiceProvider": "App\\Providers\\DirectPaymentsServiceProvider",
+        "App\\Externals\\Processor\\Connect\\BrainInternalSignature": "App\\Externals\\Marketplace\\BrainInternalSignature",
+        "App\\Externals\\Processor\\Connect\\ConnectAccountService": "App\\Externals\\Marketplace\\ConnectAccountService",
+        "App\\Externals\\Processor\\Connect\\ConnectProfileService": "App\\Externals\\Marketplace\\ConnectProfileService",
+        "App\\Externals\\Processor\\Connect\\Jobs\\ExecutePendingTransfersJob": "App\\Externals\\Marketplace\\Jobs\\ExecutePendingTransfersJob",
+        "App\\Externals\\Processor\\Connect\\Jobs\\SyncConnectAccountJob": "App\\Externals\\Marketplace\\Jobs\\SyncConnectAccountJob",
+        "App\\Externals\\Processor\\Connect\\SplitCalculator": "App\\Externals\\Marketplace\\SplitCalculator",
+        "App\\Externals\\Processor\\Connect\\TransferExecutor": "App\\Externals\\Marketplace\\TransferExecutor",
+        "App\\Services\\Brain\\Memberships\\Billing\\BillingMailer": "App\\Services\\Brain\\Memberships\\Mail\\BillingMailer"
+    }
+}

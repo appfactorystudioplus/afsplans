@@ -1,0 +1,52 @@
+READ-ONLY inventory of lab2-web (10.0.0.244), run 2026-10-06 over SSH with the lab key (lab2/ssh), by the script
+scratchpad/inventory.sh (reads facts, changes nothing, prints no secrets). Kept as the evidence behind plans 14 to 16.
+
+== host
+web.test2   up 1 day, 11 hours
+== os
+CentOS Stream 9, kernel 5.14.0-754.el9.x86_64
+== cpu/mem
+2 CPUs, 1707 MB RAM (552 used, 1154 available)
+== cgroup
+cgroup2fs  (cgroup v2)
+== psi
+no /proc/pressure     <-- PSI is NOT available on this kernel
+== tools present
+php /usr/bin/php   nginx /usr/sbin/nginx   ss   nft   iptables   rndc   named-checkconf   chronyc   curl   systemctl   journalctl   mysql   mariadb   redis-cli
+== tools absent
+pm2   node   conntrack   vnstat
+== php
+PHP 8.4.26 (cli)
+== nginx
+nginx/1.20.1
+== running services
+auditd chronyd crond dbus-broker gssproxy httpd(Apache on :808) irqbalance mariadb mongod NetworkManager nginx php-fpm polkit redis rpcbind rsyslog sshd systemd-journald systemd-logind systemd-udevd tuned user@1000 vboxadd-service
+== failed units
+(none)
+== listening TCP
+:808  :111  :22  :3306  :443  :80  127.0.0.1:27017  127.0.0.1:6379
+== nginx layout
+/etc/nginx: certs conf.d default.d nginx.conf ... ; conf.d contains only php-fpm.conf and ssl.conf (no per-tenant vhost files on this machine)
+== nginx log directives
+one log_format "main" ('$remote_addr - $remote_user [$time_local] "$request" ...'), one access_log /var/log/nginx/access.log main, one error_log
+   --> the format has NO $server_name / $host field, so web traffic cannot be attributed to a site from this log as it is
+== php-fpm pools
+/etc/php-fpm.d/www.conf only: ONE shared pool, not one per tenant
+== pm2
+absent
+== nf_conntrack accounting
+no nf_conntrack sysctl (module not loaded)
+== firewall
+firewalld inactive, ufw inactive
+== users with a home
+vagrant:1000  admin:1200  appfactorystudio:1500  vmail:1600   (no tenant system users on this machine)
+== disks
+/ xfs 19G (30%), /mnt/node1, /mnt/node2, /mnt/storage1, /mnt/storage2 (10G each)
+== interfaces
+lo, eth0 10.0.2.15 (NAT), eth1 10.0.0.244 (bridged LAN)
+
+== lab2 Brain database (testdb_appfactorystudio, read-only query, no credentials printed)
+brain_http_servers: 2 rows
+  id 1  active  hostname server1.cradle2careertx.org  public_ipv4 10.0.0.243  server_type 'Brain'   <-- the Brain host IS a row, with its own type
+  id 2  active  hostname node1.appfactory.studio       public_ipv4 10.0.0.244  server_type 'Head'
+brain_http_server_tenants: 4 rows on 2 addresses (3.130.107.19 x3, 45.79.42.137 x1) -- neither is a lab server (copied production data), so the lab has no tenant that is actually on a lab server

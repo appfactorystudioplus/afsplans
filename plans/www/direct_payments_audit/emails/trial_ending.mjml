@@ -1,0 +1,20 @@
+<!--
+  AFS_DIRECT_PAYMENTS_MODIFIER_ADDITION — plans/www/direct_payments_audit/15-default-emails.md §15.3.
+  Default email body: trial_ending. Reminder a few days before a free trial ends.
+  A fragment only: DefaultEmailTemplates::mjml() places it in the dp_body slot of _layout.mjml.
+-->
+    <mj-section padding="20px 0 0 0">
+      <mj-column>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="22px" font-weight="700" line-height="30px" color="#111827" padding="0px 32px">Your free trial ends soon</mj-text>
+        <mj-text font-family="Inter, Helvetica, Arial, sans-serif" font-size="15px" line-height="24px" color="#374151" padding="16px 32px 0px 32px">
+            <p style="margin:0 0 12px 0;">${dp_greeting}</p>
+            <p style="margin:0 0 12px 0;">Your free trial of <strong>${plan_name}</strong> ends on ${next_charge_date}. After that, your subscription starts and you will be charged ${amount}.</p>
+            <p style="margin:0 0 12px 0;">Want to keep going? There's nothing to do. If you don't want to continue, cancel before ${next_charge_date}.</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section padding="8px 0 0 0">
+      <mj-column>
+        <mj-button href="${manage_subscription_url}" align="left" background-color="${dp_brand_color}" color="#ffffff" font-family="Inter, Helvetica, Arial, sans-serif" font-size="15px" font-weight="600" border-radius="6px" inner-padding="14px 28px" padding="20px 32px 0px 32px">Manage subscription</mj-button>
+      </mj-column>
+    </mj-section>

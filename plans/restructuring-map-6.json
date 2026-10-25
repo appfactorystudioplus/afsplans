@@ -1,0 +1,8 @@
+{
+    "moved": {
+        "Services/Portal/Email/EmailManager.php": "Services/Portal/MailHandler/EmailManager.php"
+    },
+    "classes": {
+        "App\\Services\\Portal\\Email\\EmailManager": "App\\Services\\Portal\\MailHandler\\EmailManager"
+    }
+}
